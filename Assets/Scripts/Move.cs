@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(CharacterController))]
 public class Move : MonoBehaviour
@@ -14,6 +15,10 @@ public class Move : MonoBehaviour
     public float lookXLimit = 45.0f;
 
     public event Action<Transform, float> OnNoise;
+
+    public AudioResource audioWalkOnStone;
+    public AudioResource audioWalkOnBones;
+    public AudioSource playerWalking;
 
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
@@ -86,6 +91,7 @@ public class Move : MonoBehaviour
 
             bool isGroundBoneHit = false;  // by default
             bool isGroundStoneHit = false; // by default
+            bool isNoisy = false;  // by default
             float noiseVolume = 0.0F;  // by default
             if (hasHitSomething) {
                 //Debug.Log("hit something: " + hit.transform + " " + hit.point);
@@ -93,10 +99,12 @@ public class Move : MonoBehaviour
                     //Debug.Log("hit groundBone");
                     isGroundBoneHit = true;
                     noiseVolume = 0.8F;
+                    isNoisy = true;
                 } else if (hit.transform == groundStone.transform) {
                     //Debug.Log("hit groundStone");
                     isGroundStoneHit = true;
                     noiseVolume = 0.2F;
+                    isNoisy = true;
                 } else {
                     //Debug.Log("hit something else than groundBone");
                 }
@@ -104,10 +112,13 @@ public class Move : MonoBehaviour
                 //Debug.Log("pas hit");
             }
 
-            if (isGroundBoneHit || isGroundStoneHit) {
+            Vector3 moveDirectionWithoutY = new Vector3(moveDirection.x, 0, moveDirection.z);
+            bool isActuallyMoving = !(characterController.isGrounded && (moveDirectionWithoutY == Vector3.zero));
+
+            // si on marche sur quelque chose de bruyant, alors on envoie le son aux ennemis
+            if (isNoisy) {
                 //Debug.Log(moveDirection);
-                Vector3 moveDirectionWithoutY = new Vector3(moveDirection.x, 0, moveDirection.z);
-                if (characterController.isGrounded && (moveDirectionWithoutY == Vector3.zero)) {
+                if (!isActuallyMoving) {
                     // immobile
                 } else {
                     //Debug.Log("crounch");
@@ -115,6 +126,30 @@ public class Move : MonoBehaviour
                 }
             } else {
                 // rien
+            }
+
+            // si on marche, alors on entend du brouit dans les haut-parleurs
+            AudioResource audioToPlay = null;  // by default
+            if (isGroundBoneHit) {
+                audioToPlay = audioWalkOnBones;
+            } else if (isGroundStoneHit) {
+                audioToPlay = audioWalkOnStone;
+            } else {
+                // pas de ground bruyant, pas de bruit
+            }
+            Debug.Log("isNoisy=" + isNoisy + " isActuallyMoving=" + isActuallyMoving);
+            if (isNoisy && isActuallyMoving) {
+                if (playerWalking.isPlaying) {
+                    // keep playing
+                    // TODO: changer de son si on change de ground
+                    Debug.Log("already playing");
+                } else {
+                    playerWalking.Play();
+                    Debug.Log("play");
+                }
+            } else {
+                playerWalking.Stop();
+                Debug.Log("stop");
             }
         } else {
             // osef
