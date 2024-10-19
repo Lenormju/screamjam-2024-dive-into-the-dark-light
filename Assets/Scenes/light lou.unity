@@ -1294,7 +1294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BorneMinToActivated: 5
   BorneMaxToActivated: 10
-  SecondActivated: 1
+  SecondActivated: 0.3
 --- !u!1001 &1630827379
 PrefabInstance:
   m_ObjectHideFlags: 0

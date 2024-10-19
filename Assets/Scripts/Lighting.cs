@@ -12,7 +12,7 @@ public class Lighting : MonoBehaviour
     public int BorneMinToActivated = 5;
     public int BorneMaxToActivated = 10;
 
-    public int SecondActivated = 1;
+    public float SecondActivated = 1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,8 +34,8 @@ public class Lighting : MonoBehaviour
             Debug.Log("Bouuuuuh!");
             PlayWithLight(true);
         }
-        // si activé, désactive au bout de 1 seconde
-        else if(_isActivated == true && _countSeconds >= 1){
+        // si activé, désactive au bout de X seconde
+        else if(_isActivated == true && _countSeconds >= SecondActivated){
             Debug.Log("You Cant See Me!");            
             PlayWithLight(false);
         }
