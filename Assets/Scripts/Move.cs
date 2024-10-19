@@ -77,82 +77,75 @@ public class Move : MonoBehaviour
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
 
-        // Est-ce que le Player marche sur de la boue/os ?
-        GameObject groundBone = GameObject.Find("/Ground Bruyant");
-        GameObject groundStone = GameObject.Find("/Ground Pas Bruyant");
-        bool groundBoneExists = (groundBone != null);
-        if (groundBoneExists) {
-            // on va raycaster depuis le personnage vers le bas, et voir si on hit un ground
-            Vector3 origin = this.transform.position;
-            Vector3 direction = Vector3.down;
+        // on va raycaster depuis le personnage vers le bas, et voir si on hit un ground
+        Vector3 origin = this.transform.position;
+        Vector3 direction = Vector3.down;
 
-            RaycastHit hit;
-            bool hasHitSomething = Physics.Raycast(origin, direction, out hit);
+        RaycastHit hit;
+        bool hasHitSomething = Physics.Raycast(origin, direction, out hit);
 
-            bool isGroundBoneHit = false;  // by default
-            bool isGroundStoneHit = false; // by default
-            bool isNoisy = false;  // by default
-            float noiseVolume = 0.0F;  // by default
-            if (hasHitSomething) {
-                //Debug.Log("hit something: " + hit.transform + " " + hit.point);
-                if (hit.transform == groundBone.transform) {
-                    //Debug.Log("hit groundBone");
-                    isGroundBoneHit = true;
-                    noiseVolume = 0.8F;
-                    isNoisy = true;
-                } else if (hit.transform == groundStone.transform) {
-                    //Debug.Log("hit groundStone");
-                    isGroundStoneHit = true;
-                    noiseVolume = 0.2F;
-                    isNoisy = true;
-                } else {
-                    //Debug.Log("hit something else than groundBone");
-                }
+        bool isGroundBoneHit = false;  // by default
+        bool isGroundStoneHit = false; // by default
+        bool isNoisy = false;  // by default
+        float noiseVolume = 0.0F;  // by default
+        if (hasHitSomething) {
+            //Debug.Log("hit something: " + hit.transform + " " + hit.point);
+            if (hit.transform.tag == "Bones") {
+                //Debug.Log("hit groundBone");
+                isGroundBoneHit = true;
+                noiseVolume = 0.8F;
+                isNoisy = true;
+            } else if (hit.transform.tag == "Stone") {
+                //Debug.Log("hit groundStone");
+                isGroundStoneHit = true;
+                noiseVolume = 0.2F;
+                isNoisy = true;
             } else {
-                //Debug.Log("pas hit");
-            }
-
-            Vector3 moveDirectionWithoutY = new Vector3(moveDirection.x, 0, moveDirection.z);
-            bool isActuallyMoving = !(characterController.isGrounded && (moveDirectionWithoutY == Vector3.zero));
-
-            // si on marche sur quelque chose de bruyant, alors on envoie le son aux ennemis
-            if (isNoisy) {
-                //Debug.Log(moveDirection);
-                if (!isActuallyMoving) {
-                    // immobile
-                } else {
-                    //Debug.Log("crounch");
-                    OnNoise?.Invoke(hit.transform, noiseVolume);
-                }
-            } else {
-                // rien
-            }
-
-            // si on marche, alors on entend du brouit dans les haut-parleurs
-            AudioResource audioToPlay = null;  // by default
-            if (isGroundBoneHit) {
-                audioToPlay = audioWalkOnBones;
-            } else if (isGroundStoneHit) {
-                audioToPlay = audioWalkOnStone;
-            } else {
-                // pas de ground bruyant, pas de bruit
-            }
-            Debug.Log("isNoisy=" + isNoisy + " isActuallyMoving=" + isActuallyMoving);
-            if (isNoisy && isActuallyMoving) {
-                if (playerWalking.isPlaying) {
-                    // keep playing
-                    // TODO: changer de son si on change de ground
-                    Debug.Log("already playing");
-                } else {
-                    playerWalking.Play();
-                    Debug.Log("play");
-                }
-            } else {
-                playerWalking.Stop();
-                Debug.Log("stop");
+                //Debug.Log("hit something else than groundBone/groundStone");
             }
         } else {
-            // osef
+            //Debug.Log("pas hit");
+        }
+
+        Vector3 moveDirectionWithoutY = new Vector3(moveDirection.x, 0, moveDirection.z);
+        bool isActuallyMoving = !(characterController.isGrounded && (moveDirectionWithoutY == Vector3.zero));
+
+        // si on marche sur quelque chose de bruyant, alors on envoie le son aux ennemis
+        if (isNoisy) {
+            //Debug.Log(moveDirection);
+            if (!isActuallyMoving) {
+                // immobile
+            } else {
+                //Debug.Log("crounch");
+                OnNoise?.Invoke(hit.transform, noiseVolume);
+            }
+        } else {
+            // rien
+        }
+
+        // si on marche, alors on entend du brouit dans les haut-parleurs
+        AudioResource audioToPlay = null;  // by default
+        if (isGroundBoneHit) {
+            audioToPlay = audioWalkOnBones;
+        } else if (isGroundStoneHit) {
+            audioToPlay = audioWalkOnStone;
+        } else {
+            // pas de ground bruyant, pas de bruit
+        }
+        Debug.Log("isNoisy=" + isNoisy + " isActuallyMoving=" + isActuallyMoving + " isPlaying=" + playerWalking.isPlaying);
+        if (isNoisy && isActuallyMoving) {
+            if (playerWalking.isPlaying) {
+                // keep playing
+                // TODO: changer de son si on change de ground
+                Debug.Log("already playing");
+            } else {
+                playerWalking.resource = audioToPlay;
+                playerWalking.Play();
+                Debug.Log("play");
+            }
+        } else {
+            playerWalking.Stop();
+            Debug.Log("stop");
         }
     }
 
