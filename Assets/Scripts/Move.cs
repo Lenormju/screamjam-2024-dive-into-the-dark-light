@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(CharacterController))]
 public class Move : MonoBehaviour
@@ -11,6 +12,8 @@ public class Move : MonoBehaviour
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
+
+    public event Action<Transform> OnNoise;
 
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
@@ -67,6 +70,47 @@ public class Move : MonoBehaviour
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        }
+
+        // Est-ce que le Player marche sur de la boue/os ?
+        GameObject ground_bruyant = GameObject.Find("/Ground Bruyant");
+        GameObject ground_pas_bruyant = GameObject.Find("/Ground Pas Bruyant");
+        bool is_there_a_ground_pas_bruyant = (ground_bruyant != null);
+        if (is_there_a_ground_pas_bruyant) {
+            // on va raycaster depuis le personnage vers le bas, et voir si on hit le "ground bruyant"
+            Vector3 origin = this.transform.position;
+            Vector3 direction = Vector3.down;
+
+            RaycastHit hit;
+            bool has_hit_something = Physics.Raycast(origin, direction, out hit);
+
+            bool is_ground_bruyant_hit = false;  // by default
+            if (has_hit_something) {
+                //Debug.Log("hit something: " + hit.transform + " " + hit.point);
+                if (hit.transform == ground_bruyant.transform) {
+                    //Debug.Log("hit ground_bruyant");
+                    is_ground_bruyant_hit = true;
+                } else {
+                    //Debug.Log("hit something else than ground_bruyant");
+                }
+            } else {
+                //Debug.Log("pas hit");
+            }
+
+            if (is_ground_bruyant_hit) {
+                //Debug.Log(moveDirection);
+                Vector3 moveDirectionWithoutY = new Vector3(moveDirection.x, 0, moveDirection.z);
+                if (characterController.isGrounded && (moveDirectionWithoutY == Vector3.zero)) {
+                    // immobile
+                } else {
+                    //Debug.Log("crounch");
+                    OnNoise?.Invoke(hit.transform);
+                }
+            } else {
+                // rien
+            }
+        } else {
+            // osef
         }
     }
 
