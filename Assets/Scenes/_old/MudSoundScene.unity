@@ -531,6 +531,14 @@ PrefabInstance:
       value: GroundStone
       objectReference: {fileID: 0}
     - target: {fileID: 7285394177938550308, guid: eba768c19c96ea944a4af6468c457261, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7285394177938550308, guid: eba768c19c96ea944a4af6468c457261, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7285394177938550308, guid: eba768c19c96ea944a4af6468c457261, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
