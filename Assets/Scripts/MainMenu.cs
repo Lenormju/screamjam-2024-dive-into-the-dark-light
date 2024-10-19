@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    public void StartGame(string sceneName)
+    public void StartGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("integration_pinjoni-3");
     }
 
     public void OpenSettings()
