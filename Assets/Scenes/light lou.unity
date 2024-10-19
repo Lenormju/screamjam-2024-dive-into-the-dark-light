@@ -1280,6 +1280,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa517a85274233448bc9d22966c6a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BorneMinToActivated: 5
+  BorneMaxToActivated: 10
+  SecondActivated: 1
 --- !u!1001 &1630827379
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1613,11 +1616,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4949545350033925497, guid: 17aa41a1468bfde41babee7916f191ed, type: 3}
       propertyPath: m_SpotAngle
-      value: 98.942116
+      value: 56.6
       objectReference: {fileID: 0}
     - target: {fileID: 4949545350033925497, guid: 17aa41a1468bfde41babee7916f191ed, type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 61.06125
+      value: 29.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
