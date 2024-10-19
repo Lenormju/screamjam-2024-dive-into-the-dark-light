@@ -13,7 +13,7 @@ public class Move : MonoBehaviour
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
 
-    public event Action<Transform> OnNoise;
+    public event Action<Transform, float> OnNoise;
 
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
@@ -73,38 +73,45 @@ public class Move : MonoBehaviour
         }
 
         // Est-ce que le Player marche sur de la boue/os ?
-        GameObject ground_bruyant = GameObject.Find("/Ground Bruyant");
-        GameObject ground_pas_bruyant = GameObject.Find("/Ground Pas Bruyant");
-        bool is_there_a_ground_pas_bruyant = (ground_bruyant != null);
-        if (is_there_a_ground_pas_bruyant) {
-            // on va raycaster depuis le personnage vers le bas, et voir si on hit le "ground bruyant"
+        GameObject groundBone = GameObject.Find("/Ground Bruyant");
+        GameObject groundStone = GameObject.Find("/Ground Pas Bruyant");
+        bool groundBoneExists = (groundBone != null);
+        if (groundBoneExists) {
+            // on va raycaster depuis le personnage vers le bas, et voir si on hit un ground
             Vector3 origin = this.transform.position;
             Vector3 direction = Vector3.down;
 
             RaycastHit hit;
-            bool has_hit_something = Physics.Raycast(origin, direction, out hit);
+            bool hasHitSomething = Physics.Raycast(origin, direction, out hit);
 
-            bool is_ground_bruyant_hit = false;  // by default
-            if (has_hit_something) {
+            bool isGroundBoneHit = false;  // by default
+            bool isGroundStoneHit = false; // by default
+            float noiseVolume = 0.0F;  // by default
+            if (hasHitSomething) {
                 //Debug.Log("hit something: " + hit.transform + " " + hit.point);
-                if (hit.transform == ground_bruyant.transform) {
-                    //Debug.Log("hit ground_bruyant");
-                    is_ground_bruyant_hit = true;
+                if (hit.transform == groundBone.transform) {
+                    //Debug.Log("hit groundBone");
+                    isGroundBoneHit = true;
+                    noiseVolume = 0.8F;
+                } else if (hit.transform == groundStone.transform) {
+                    //Debug.Log("hit groundStone");
+                    isGroundStoneHit = true;
+                    noiseVolume = 0.2F;
                 } else {
-                    //Debug.Log("hit something else than ground_bruyant");
+                    //Debug.Log("hit something else than groundBone");
                 }
             } else {
                 //Debug.Log("pas hit");
             }
 
-            if (is_ground_bruyant_hit) {
+            if (isGroundBoneHit || isGroundStoneHit) {
                 //Debug.Log(moveDirection);
                 Vector3 moveDirectionWithoutY = new Vector3(moveDirection.x, 0, moveDirection.z);
                 if (characterController.isGrounded && (moveDirectionWithoutY == Vector3.zero)) {
                     // immobile
                 } else {
                     //Debug.Log("crounch");
-                    OnNoise?.Invoke(hit.transform);
+                    OnNoise?.Invoke(hit.transform, noiseVolume);
                 }
             } else {
                 // rien
