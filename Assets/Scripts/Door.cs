@@ -4,7 +4,7 @@ public class Door : MonoBehaviour
 {
     private bool is_in_range = false;
     private bool is_door_open = false;
-    private Animator animator;
+        private Animator animator;
 
     /// Start is called on the frame when a script is enabled just before
     private void Start()
