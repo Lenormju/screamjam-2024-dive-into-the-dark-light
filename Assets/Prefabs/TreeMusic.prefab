@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8086729422670533140}
   - component: {fileID: 2843917315570105750}
   m_Layer: 0
-  m_Name: Tree
+  m_Name: TreeMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
