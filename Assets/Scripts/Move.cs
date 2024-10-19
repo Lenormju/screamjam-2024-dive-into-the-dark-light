@@ -5,6 +5,13 @@ public class Move : MonoBehaviour
     public float SpeedPlayer = 3;
     public float SensibilityCamera = 5;
 
+    // Use this for initialization
+    void Start()
+    {
+        //Set Cursor to not be visible
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     // Update is called once per frame
     void Update()
     {
