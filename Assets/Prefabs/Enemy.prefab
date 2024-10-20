@@ -194,11 +194,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPatrolling: 1
-  patrollingPos1: {x: 5.2, y: -8.2, z: -150.5}
-  patrollingPos2: {x: 13.8, y: -8.2, z: -150.5}
-  killRange: 2
+  patrollingPos2: {x: 6, y: 0, z: 0}
+  killRange: 0.8
   killCollider: {fileID: 4160463594740184954}
   distCloseEnough: 1
+  distCloseEnoughSound: 10
   scentRange: 5
   timeWaitOnPlaceWhenLostTarget: 3
 --- !u!135 &1735202625695698828

@@ -5,7 +5,7 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private bool isPatrolling = false;
     private int currentPatrolPoint = 1;
-    [SerializeField] private Vector3 patrollingPos1;
+    private Vector3 patrollingPos1;
     [SerializeField] private Vector3 patrollingPos2;
     private SphereCollider scentCollider;
     [SerializeField] private float killRange = 3f;
@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour
     private NavMeshAgent _agent;
     private bool chasingPlayer = false;
     void Start() {
+        patrollingPos1 = this.transform.position;
         _agent = GetComponent<NavMeshAgent>();
         scentCollider = GetComponent<SphereCollider>();
         killCollider.radius = killRange;
@@ -57,7 +58,7 @@ public class EnemyAI : MonoBehaviour
             if (currentPatrolPoint == 1) {
                 _agent.destination = patrollingPos1;
             } else {
-                _agent.destination = patrollingPos2;
+                _agent.destination = patrollingPos1 + patrollingPos2;
             }
         }
     }
@@ -69,12 +70,13 @@ public class EnemyAI : MonoBehaviour
         if (IsCloseEnough(transform.position, patrollingPos1)) {
             currentPatrolPoint = 2;
         } 
-        if (IsCloseEnough(transform.position, patrollingPos2)) {
+        if (IsCloseEnough(transform.position, patrollingPos1 + patrollingPos2)) {
             currentPatrolPoint = 1;
         }
     }
 
     [SerializeField] private float distCloseEnough = 1f;
+    [SerializeField] private float distCloseEnoughSound = 10f;
     bool IsCloseEnough(Vector3 pos1, Vector3 pos2) {
         pos1.y = 0;
         pos2.y = 0;
@@ -83,9 +85,14 @@ public class EnemyAI : MonoBehaviour
 
     private Transform soundTarget = null;
     void onNoiseEmitted(Transform noise, float intensity) {
-        hasTarget = true;
-        _timerWaitOnPlace = 0;
-        soundTarget = noise;
+        float hearRange = intensity * distCloseEnoughSound * 5;
+        if (Vector3.Distance(this.transform.position, noise.position) < hearRange)
+        {
+            Debug.Log("SOUND DISTANCE");
+            hasTarget = true;
+            _timerWaitOnPlace = 0;
+            soundTarget = noise;
+        }
     }
 
     [SerializeField] private float scentRange = 5f;
