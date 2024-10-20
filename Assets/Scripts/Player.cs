@@ -17,8 +17,14 @@ public class Player : MonoBehaviour
 
     public event Action<Transform, float> OnNoise;
 
-    public AudioResource audioWalkOnStone;
-    public AudioResource audioWalkOnBones;
+    public AudioResource audioWalkOnStone1;
+    public AudioResource audioWalkOnStone2;
+    public AudioResource audioWalkOnStone3;
+    public AudioResource audioWalkOnStone4;
+    public AudioResource audioWalkOnBones1;
+    public AudioResource audioWalkOnBones2;
+    public AudioResource audioWalkOnBones3;
+    public AudioResource audioWalkOnBones4;
     public AudioSource playerWalking;
 
     CharacterController characterController;
@@ -105,6 +111,7 @@ public class Player : MonoBehaviour
         bool isGroundStoneHit = false; // by default
         bool isNoisy = false;  // by default
         float noiseVolume = 0.0F;  // by default
+        string groundCategory = "none by default";  // by default
         if (hasHitSomething) {
             //Debug.Log("hit something: " + hit.transform + " " + hit.point);
             if (hit.transform.tag == "Bones") {
@@ -112,11 +119,13 @@ public class Player : MonoBehaviour
                 isGroundBoneHit = true;
                 noiseVolume = 0.8F;
                 isNoisy = true;
+                groundCategory = hit.transform.tag;
             } else if (hit.transform.tag == "Stone") {
                 //Debug.Log("hit groundStone");
                 isGroundStoneHit = true;
                 noiseVolume = 0.2F;
                 isNoisy = true;
+                groundCategory = hit.transform.tag;
             } else {
                 //Debug.Log("hit something else than groundBone/groundStone");
             }
@@ -140,23 +149,46 @@ public class Player : MonoBehaviour
             // rien
         }
 
-        // si on marche, alors on entend du brouit dans les haut-parleurs
+        System.Random rnd = new System.Random();
+        // sélectionner le bruit à jouer
         AudioResource audioToPlay = null;  // by default
         if (isGroundBoneHit) {
-            audioToPlay = audioWalkOnBones;
+            int sound  = rnd.Next(1, 5);  
+            if (sound == 1) {
+                audioToPlay = audioWalkOnBones1;
+            } else if (sound == 2) {
+                audioToPlay = audioWalkOnBones2;
+            } else if (sound == 3) {
+                audioToPlay = audioWalkOnBones3;
+            } else if (sound == 4) {
+                audioToPlay = audioWalkOnBones4;
+            } else {
+                Debug.Log("error value from random");
+            }
         } else if (isGroundStoneHit) {
-            audioToPlay = audioWalkOnStone;
+            int sound  = rnd.Next(1, 5);  
+            if (sound == 1) {
+                audioToPlay = audioWalkOnStone1;
+            } else if (sound == 2) {
+                audioToPlay = audioWalkOnStone2;
+            } else if (sound == 3) {
+                audioToPlay = audioWalkOnStone3;
+            } else if (sound == 4) {
+                audioToPlay = audioWalkOnStone4;
+            } else {
+                Debug.Log("error value from random");
+            }
         } else {
             // pas de ground bruyant, pas de bruit
         }
         //Debug.Log("isNoisy=" + isNoisy + " isActuallyMoving=" + isActuallyMoving + " isPlaying=" + playerWalking.isPlaying);
         if (isNoisy && isActuallyMoving) {
-            AudioResource currentGroundWalkingAudio = GameManager.Instance.currentGroundWalkingAudio;
-            if (playerWalking.isPlaying && (currentGroundWalkingAudio == audioToPlay)) {
+            string currentGroundWalkingCategory = GameManager.Instance.currentGroundWalkingCategory;
+            if (playerWalking.isPlaying && (currentGroundWalkingCategory == groundCategory)) {
                 //Debug.Log("keep playing");
             } else {
                 playerWalking.resource = audioToPlay;
-                GameManager.Instance.currentGroundWalkingAudio = audioToPlay;
+                GameManager.Instance.currentGroundWalkingCategory = groundCategory;
                 playerWalking.Play();
                 //Debug.Log("play " + audioToPlay);
             }

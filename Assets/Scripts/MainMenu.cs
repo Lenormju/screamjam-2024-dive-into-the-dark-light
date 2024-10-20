@@ -8,6 +8,11 @@ public class MainMenu : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("integration_pinjoni-3");
     }
 
+    public void StartIntro()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Intro");
+    }
+
     public void OpenSettings()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Settings");

@@ -1,5 +1,134 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2950489667957129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2189734921646561671}
+  - component: {fileID: 7926569025120104184}
+  m_Layer: 0
+  m_Name: WalkingSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2189734921646561671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2950489667957129}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1448563138111241180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &7926569025120104184
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2950489667957129}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1260969376610488246
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,6 +822,7 @@ Transform:
   - {fileID: 1427623877342217291}
   - {fileID: 2886347705785735675}
   - {fileID: 5393274405844512606}
+  - {fileID: 2189734921646561671}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7956689877235174920
@@ -714,9 +844,15 @@ MonoBehaviour:
   playerCamera: {fileID: 8496925286124033729}
   lookSpeed: 2
   lookXLimit: 45
-  audioWalkOnStone: {fileID: 8300000, guid: a9cc1b42d8168484ba29f3eaa8d7cd42, type: 3}
-  audioWalkOnBones: {fileID: 8300000, guid: a9cc1b42d8168484ba29f3eaa8d7cd42, type: 3}
-  playerWalking: {fileID: 669273271447166396}
+  audioWalkOnStone1: {fileID: 8300000, guid: d1a1af4dca753c94d9a3aea2a16e5ac1, type: 3}
+  audioWalkOnStone2: {fileID: 8300000, guid: 76d9ffc6d22ce3546b288ac053f7867a, type: 3}
+  audioWalkOnStone3: {fileID: 8300000, guid: 0ce139d559651fb47b02deb0238e22c5, type: 3}
+  audioWalkOnStone4: {fileID: 8300000, guid: 3c901706d1502054e9150543067918e6, type: 3}
+  audioWalkOnBones1: {fileID: 8300000, guid: fb56637253c0b5743b136936733cc920, type: 3}
+  audioWalkOnBones2: {fileID: 8300000, guid: d36152fa2ea8f954195dd40ab4021f8f, type: 3}
+  audioWalkOnBones3: {fileID: 8300000, guid: 14665ba7efe3dba4f87316d545e9fd89, type: 3}
+  audioWalkOnBones4: {fileID: 8300000, guid: 13284f65c7a22604e9ed62eeffc4f05d, type: 3}
+  playerWalking: {fileID: 7926569025120104184}
   canMove: 1
 --- !u!143 &4500104048722513475
 CharacterController:

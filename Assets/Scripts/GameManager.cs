@@ -25,11 +25,12 @@ public class GameManager : MonoBehaviour {
     public bool GotKey1 = false;
     public bool GotKey2 = false;
     public bool GotKey3 = false;
-    public AudioResource currentGroundWalkingAudio = null;  // the audio clip of the noisy groudn we are currently working on
+    public string currentGroundWalkingCategory = "none by default";  // the audio clip of the noisy groudn we are currently working on
 
     public void DisplayEndScreen()
     {
         Debug.Log("fin du  game");
     }
+    public int nb_keys = 0;
 
 }
