@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class Door : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class Door : MonoBehaviour
     private float pushAmount = 0;
     [SerializeField] private float amountOnClick = 10;
     [SerializeField] private float losingOverTimeAmount = 10;
+    public AudioSource doorAudioSource;
+    public AudioClip doorOpeningSound;
+    public AudioClip doorClosingSound;
 
 
     [SerializeField] private int nb_keys_needed = 0;
@@ -33,12 +37,14 @@ public class Door : MonoBehaviour
                 {
                     animator.SetTrigger("openingDoor");
                     is_door_open = true;
+                    doorAudioSource.PlayOneShot(doorOpeningSound);
                 }
             }
             else if (pushAmount <= 0)
             {
                 animator.SetTrigger("closingDoor");
                 is_door_open = false;
+                doorAudioSource.PlayOneShot(doorClosingSound);
             }
         }
         if (pushAmount > 0)
