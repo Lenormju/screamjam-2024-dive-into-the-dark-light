@@ -1,3 +1,4 @@
+using TMPro.Examples;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -7,10 +8,6 @@ public class GameManager : MonoBehaviour {
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = FindFirstObjectByType<GameManager>();
-            }
             return _instance;
         }
         set
@@ -19,9 +16,18 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public GameObject Player;
+    void Awake() {
+        _instance = FindFirstObjectByType<GameManager>();
+    }
+
+    public Player Player;
     public bool GotKey1 = false;
     public bool GotKey2 = false;
     public bool GotKey3 = false;
+
+    public void DisplayEndScreen()
+    {
+        Debug.Log("fin du  game");
+    }
 
 }
