@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class keyCollection : MonoBehaviour
@@ -19,6 +20,7 @@ public class keyCollection : MonoBehaviour
                 GameManager.Instance.GotKey1 = true;
             } else if (other.gameObject.name == "Key2"){
                 GameManager.Instance.GotKey2 = true;
+                GameManager.Instance.InvokeKey2();
             } else if (other.gameObject.name == "Key3"){
                 GameManager.Instance.GotKey3 = true;
             }

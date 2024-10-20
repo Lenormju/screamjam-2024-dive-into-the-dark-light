@@ -147,11 +147,12 @@ public class Player : MonoBehaviour
         } else {
             // rien
         }
-
+        float newSpeed = walkingSpeed;
         System.Random rnd = new System.Random();
         // sélectionner le bruit à jouer
         AudioResource audioToPlay = null;  // by default
         if (isGroundBoneHit) {
+            newSpeed = walkingSpeed/2;
             int sound  = rnd.Next(1, 5);  
             if (sound == 1) {
                 audioToPlay = audioWalkOnBones1;
@@ -165,6 +166,7 @@ public class Player : MonoBehaviour
                 Debug.Log("error value from random");
             }
         } else if (isGroundStoneHit) {
+            newSpeed = walkingSpeed*2;
             int sound  = rnd.Next(1, 4);  
             if (sound == 1) {
                 audioToPlay = audioWalkOnStone2;
@@ -181,6 +183,9 @@ public class Player : MonoBehaviour
         //Debug.Log("isNoisy=" + isNoisy + " isActuallyMoving=" + isActuallyMoving + " isPlaying=" + playerWalking.isPlaying);
         if (isNoisy && isActuallyMoving) {
             string currentGroundWalkingCategory = GameManager.Instance.currentGroundWalkingCategory;
+             if(currentGroundWalkingCategory != groundCategory){
+                walkingSpeed = newSpeed;
+            }
             if (playerWalking.isPlaying && (currentGroundWalkingCategory == groundCategory)) {
                 //Debug.Log("keep playing");
             } else if (!GameManager.Instance.isGamePaused) {
@@ -188,7 +193,7 @@ public class Player : MonoBehaviour
                 GameManager.Instance.currentGroundWalkingCategory = groundCategory;
                 playerWalking.Play();
                 //Debug.Log("play " + audioToPlay);
-            }
+            }            
         } else {
             playerWalking.Stop();
             //Debug.Log("stop");

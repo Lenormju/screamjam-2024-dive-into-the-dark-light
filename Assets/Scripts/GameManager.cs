@@ -1,3 +1,4 @@
+using System;
 using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -18,6 +19,10 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void InvokeKey2(){
+        EventKey2?.Invoke(this, EventArgs.Empty);
+    }
+
     void Awake() {
          Time.timeScale = 1;
          isGamePaused = false;
@@ -28,6 +33,7 @@ public class GameManager : MonoBehaviour {
     public bool GotKey1 = false;
     public bool GotKey2 = false;
     public bool GotKey3 = false;
+    public event EventHandler EventKey2;
     public string currentGroundWalkingCategory = "none by default";  // the audio clip of the noisy groudn we are currently working on
     public GlobalMusic globalMusic;
 
