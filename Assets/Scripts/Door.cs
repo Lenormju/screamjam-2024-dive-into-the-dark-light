@@ -39,7 +39,6 @@ public class Door : MonoBehaviour
                     doorAudioSource.PlayOneShot(doorLockedSound);
                 } else if (pushAmount >= amountToOpen && GameManager.Instance.nb_keys >= nb_keys_needed)
                 {
-                    //Debug.Log("enough keys and push, will open");
                     GameManager.Instance.RemoveKey(nb_keys_needed);
                     animator.SetTrigger("openingDoor");
                     is_door_open = true;
@@ -62,7 +61,7 @@ public class Door : MonoBehaviour
                 pushAmount = 0;
             }
         }
-        if (PushSlider != null && !is_door_open && amountToOpen > 0 && pushAmount > 0)  // start QTE
+        if (PushSlider != null && !is_door_open && amountToOpen > 0 && pushAmount > 0)
         {
             PushSlider.gameObject.SetActive(true);
             PushSlider.value = pushAmount;
