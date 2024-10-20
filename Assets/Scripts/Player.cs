@@ -183,7 +183,7 @@ public class Player : MonoBehaviour
             string currentGroundWalkingCategory = GameManager.Instance.currentGroundWalkingCategory;
             if (playerWalking.isPlaying && (currentGroundWalkingCategory == groundCategory)) {
                 //Debug.Log("keep playing");
-            } else {
+            } else if (!GameManager.Instance.isGamePaused) {
                 playerWalking.resource = audioToPlay;
                 GameManager.Instance.currentGroundWalkingCategory = groundCategory;
                 playerWalking.Play();

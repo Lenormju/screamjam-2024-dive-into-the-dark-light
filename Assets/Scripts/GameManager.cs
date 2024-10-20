@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour {
     }
 
     void Awake() {
+         Time.timeScale = 1;
+         isGamePaused = false;
         _instance = FindFirstObjectByType<GameManager>();
     }
 
@@ -41,6 +43,8 @@ public class GameManager : MonoBehaviour {
 
     public bool final_boss = false;
 
+    public bool isGamePaused = false;
+
     public void DisplayEndScreen()
     {
         Debug.Log("fin du  game");
@@ -57,6 +61,12 @@ public class GameManager : MonoBehaviour {
             deathAnim.SetTrigger("displayGameOver");
         }
         SetCursorActive(true);
+    }
+
+    public void StopTime()
+    {
+        isGamePaused = true;
+        Time.timeScale = 0;
     }
 
     public void AddKey(int NbKeysToAdd = 1)

@@ -5,7 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     public void StartGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("integration_pinjoni-3");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("hall");
     }
 
     public void StartIntro()
