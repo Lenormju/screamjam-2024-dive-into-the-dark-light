@@ -27,10 +27,26 @@ public class GameManager : MonoBehaviour {
     public bool GotKey3 = false;
     public string currentGroundWalkingCategory = "none by default";  // the audio clip of the noisy groudn we are currently working on
 
+
+    [SerializeField] private Animator deathAnim;
     public void DisplayEndScreen()
     {
         Debug.Log("fin du  game");
+        deathAnim.SetTrigger("displayGameOver");
+        SetCursorActive(true);
     }
     public int nb_keys = 0;
+
+    public void SetCursorActive(bool active)
+    {
+        if (!active) {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        } else {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        
+    }
 
 }

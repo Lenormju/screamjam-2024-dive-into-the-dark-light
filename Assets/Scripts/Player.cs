@@ -42,8 +42,7 @@ public class Player : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         move.Enable();
         // Lock cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        GameManager.Instance.SetCursorActive(false);
     }
 
     bool isRunning = false;
