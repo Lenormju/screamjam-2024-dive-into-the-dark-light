@@ -35,6 +35,7 @@ public class Door : MonoBehaviour
                 pushAmount += amountOnClick;
                 if (pushAmount >= amountToOpen && GameManager.Instance.nb_keys >= nb_keys_needed)
                 {
+                    GameManager.Instance.RemoveKey(nb_keys_needed);
                     animator.SetTrigger("openingDoor");
                     is_door_open = true;
                     doorAudioSource.PlayOneShot(doorOpeningSound);
@@ -55,7 +56,7 @@ public class Door : MonoBehaviour
                 pushAmount = 0;
             }
         }
-        if (PushSlider != null && amountToOpen > 0 && pushAmount > 0)
+        if (PushSlider != null && !is_door_open && amountToOpen > 0 && pushAmount > 0)
         {
             PushSlider.gameObject.SetActive(true);
             PushSlider.value = pushAmount;

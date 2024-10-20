@@ -1,6 +1,7 @@
 using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.Audio;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
 
@@ -29,11 +30,41 @@ public class GameManager : MonoBehaviour {
 
 
     [SerializeField] private Animator deathAnim;
+    public TextMeshProUGUI keys_nb_display;
+    public GameObject key_image;
+
     public void DisplayEndScreen()
     {
         Debug.Log("fin du  game");
         deathAnim.SetTrigger("displayGameOver");
         SetCursorActive(true);
+    }
+
+    public void AddKey(int NbKeysToAdd = 1)
+    {
+        nb_keys += NbKeysToAdd;
+        SetNbKey(nb_keys);
+    }
+
+     public void RemoveKey(int NbKeysToRemove = 1)
+    {
+        nb_keys -= NbKeysToRemove;
+        SetNbKey(nb_keys);
+    }
+
+    public void SetNbKey(int nbKey)
+    {
+        nb_keys = nbKey;
+        if (nbKey > 0)
+        {
+            key_image.SetActive(true);
+            keys_nb_display.text = nbKey.ToString();
+        }
+        else
+        {
+            key_image.SetActive(false);
+            keys_nb_display.text = "";
+        }
     }
     public int nb_keys = 0;
 
