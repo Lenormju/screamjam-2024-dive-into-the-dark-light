@@ -39,9 +39,11 @@ public class EnemyAI : MonoBehaviour
         }
 
         if (chasingPlayer) { // Chasing player
+            Debug.Log("Target player");
             _agent.destination = GameManager.Instance.Player.transform.position;
         } else if (hasTarget && !chasingPlayer) { // Chasing noise
             if (soundTarget != null && hasTarget) {
+                Debug.Log("Target sound");
                 _agent.destination = soundTarget.position;
                 if (IsCloseEnough(transform.position, soundTarget.position)) {
                     LostTarget();
@@ -51,7 +53,7 @@ public class EnemyAI : MonoBehaviour
             }
         } else if (isPatrolling) { // Default patrolling
             HandlingSwitchPatrolPoint();
-
+            Debug.Log("Patrolling to " + currentPatrolPoint);
             if (currentPatrolPoint == 1) {
                 _agent.destination = patrollingPos1;
             } else {
