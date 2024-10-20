@@ -554,4 +554,5 @@ MonoBehaviour:
   doorAudioSource: {fileID: 7764100407291367747}
   doorOpeningSound: {fileID: 8300000, guid: 78821ef19f3348b4aab10762940447b8, type: 3}
   doorClosingSound: {fileID: 8300000, guid: 46f7b4465089a7b46be8c83824ff5e6c, type: 3}
+  doorLockedSound: {fileID: 8300000, guid: f48990cd90e5b334cbd4bab86daabbe7, type: 3}
   nb_keys_needed: 0

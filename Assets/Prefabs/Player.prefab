@@ -723,7 +723,7 @@ MonoBehaviour:
   audioWalkOnBones2: {fileID: 8300000, guid: d36152fa2ea8f954195dd40ab4021f8f, type: 3}
   audioWalkOnBones3: {fileID: 8300000, guid: 14665ba7efe3dba4f87316d545e9fd89, type: 3}
   audioWalkOnBones4: {fileID: 8300000, guid: 13284f65c7a22604e9ed62eeffc4f05d, type: 3}
-  playerWalking: {fileID: 0}
+  playerWalking: {fileID: 669273271447166396}
   canMove: 1
   move:
     m_Name: Move
