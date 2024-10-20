@@ -31,5 +31,6 @@ public class GameManager : MonoBehaviour {
     {
         Debug.Log("fin du  game");
     }
+    public int nb_keys = 0;
 
 }
