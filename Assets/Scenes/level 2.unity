@@ -857,6 +857,7 @@ MonoBehaviour:
   BorneMinToActivated: 5
   BorneMaxToActivated: 10
   SecondActivated: 0.3
+  thunderAudioSource: {fileID: 0}
 --- !u!4 &89456699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1095518771752151676, guid: 17aa41a1468bfde41babee7916f191ed, type: 3}
@@ -924,6 +925,7 @@ MonoBehaviour:
   BorneMinToActivated: 5
   BorneMaxToActivated: 10
   SecondActivated: 0.3
+  thunderAudioSource: {fileID: 0}
 --- !u!1001 &101684206
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1048,6 +1050,7 @@ MonoBehaviour:
   BorneMinToActivated: 5
   BorneMaxToActivated: 10
   SecondActivated: 0.3
+  thunderAudioSource: {fileID: 0}
 --- !u!4 &101684209 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1095518771752151676, guid: 17aa41a1468bfde41babee7916f191ed, type: 3}
@@ -2815,6 +2818,7 @@ MonoBehaviour:
   BorneMinToActivated: 5
   BorneMaxToActivated: 10
   SecondActivated: 0.3
+  thunderAudioSource: {fileID: 0}
 --- !u!1001 &246009920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5954,6 +5958,7 @@ MonoBehaviour:
   BorneMinToActivated: 5
   BorneMaxToActivated: 10
   SecondActivated: 0.3
+  thunderAudioSource: {fileID: 0}
 --- !u!1001 &957738213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8147,6 +8152,7 @@ MonoBehaviour:
   BorneMinToActivated: 5
   BorneMaxToActivated: 10
   SecondActivated: 0.3
+  thunderAudioSource: {fileID: 0}
 --- !u!4 &1128801977 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1095518771752151676, guid: 17aa41a1468bfde41babee7916f191ed, type: 3}
@@ -12404,7 +12410,7 @@ PrefabInstance:
       objectReference: {fileID: 1067050523}
     - target: {fileID: 5995184126988016807, guid: 16869d22d6ed2c949a2fd0cf5b7aa073, type: 3}
       propertyPath: m_VersionIndex
-      value: 59
+      value: 62
       objectReference: {fileID: 0}
     - target: {fileID: 7095739928396318709, guid: 16869d22d6ed2c949a2fd0cf5b7aa073, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15135,6 +15141,7 @@ MonoBehaviour:
   BorneMinToActivated: 5
   BorneMaxToActivated: 10
   SecondActivated: 0.3
+  thunderAudioSource: {fileID: 0}
 --- !u!4 &1461004977 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1095518771752151676, guid: 17aa41a1468bfde41babee7916f191ed, type: 3}
@@ -15155,6 +15162,7 @@ MonoBehaviour:
   BorneMinToActivated: 5
   BorneMaxToActivated: 10
   SecondActivated: 0.3
+  thunderAudioSource: {fileID: 0}
 --- !u!1 &1466914363
 GameObject:
   m_ObjectHideFlags: 0
@@ -20945,7 +20953,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.083333336
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 274d140bd72f73b43b7350cecc40ffab, type: 2}
   m_BuildHeightMesh: 0
@@ -21365,8 +21373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190695dc617b731458e8e436dde6c536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keys_nb_display: {fileID: 1926826201}
-  key_image: {fileID: 1724282771}
 --- !u!4 &1872320801 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2954770003848524015, guid: acde791609689ea48aa54803d78ca0a6, type: 3}
@@ -22233,7 +22239,15 @@ MonoBehaviour:
   GotKey1: 0
   GotKey2: 0
   GotKey3: 0
-  currentGroundWalkingAudio: {fileID: 0}
+  currentGroundWalkingCategory: none by default
+  globalMusic: {fileID: 0}
+  deathAnim: {fileID: 0}
+  deathAnimSpider: {fileID: 0}
+  keys_nb_display: {fileID: 0}
+  key_image: {fileID: 0}
+  final_boss: 0
+  isGamePaused: 0
+  nb_keys: 0
 --- !u!4 &2038955871
 Transform:
   m_ObjectHideFlags: 0
@@ -22923,7 +22937,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.083333336
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 2e9ccd331545750438b093e8d168a694, type: 2}
   m_BuildHeightMesh: 0
