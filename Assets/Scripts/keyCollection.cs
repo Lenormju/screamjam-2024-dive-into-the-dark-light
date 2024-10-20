@@ -1,14 +1,11 @@
 using UnityEngine;
-using TMPro;
 
 public class keyCollection : MonoBehaviour
 {
-    public TextMeshProUGUI keys_nb_display;
-    public GameObject key_image;
 
     private void Start()
     {
-        key_image.SetActive(false);
+        GameManager.Instance.SetNbKey(0);
     }
    
     private void OnTriggerEnter(Collider other)
@@ -16,11 +13,7 @@ public class keyCollection : MonoBehaviour
         if (other != null && other.transform.tag == "Key")
         {
             Debug.Log("found a key");
-            GameManager.Instance.nb_keys++;
-            if (GameManager.Instance.nb_keys > 0)
-            {
-                key_image.SetActive(true);
-            }
+            GameManager.Instance.AddKey();
 
             if (other.gameObject.name == "Key1"){
                 GameManager.Instance.GotKey1 = true;
@@ -29,7 +22,7 @@ public class keyCollection : MonoBehaviour
             } else if (other.gameObject.name == "Key3"){
                 GameManager.Instance.GotKey3 = true;
             }
-            keys_nb_display.text = GameManager.Instance.nb_keys.ToString();
+
             Destroy(other.gameObject);
         }
     }
