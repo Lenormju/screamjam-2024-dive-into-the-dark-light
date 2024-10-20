@@ -486,6 +486,38 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 93b4da669afd0c74bbf0081cb2d7b8cc, type: 3}
     - target: {fileID: 7956689877235174920, guid: 1e7aa36f87dddef49b4b98ba74e92218, type: 3}
+      propertyPath: audioWalkOnBones1
+      value: 
+      objectReference: {fileID: 8300000, guid: fb56637253c0b5743b136936733cc920, type: 3}
+    - target: {fileID: 7956689877235174920, guid: 1e7aa36f87dddef49b4b98ba74e92218, type: 3}
+      propertyPath: audioWalkOnBones2
+      value: 
+      objectReference: {fileID: 8300000, guid: d36152fa2ea8f954195dd40ab4021f8f, type: 3}
+    - target: {fileID: 7956689877235174920, guid: 1e7aa36f87dddef49b4b98ba74e92218, type: 3}
+      propertyPath: audioWalkOnBones3
+      value: 
+      objectReference: {fileID: 8300000, guid: 14665ba7efe3dba4f87316d545e9fd89, type: 3}
+    - target: {fileID: 7956689877235174920, guid: 1e7aa36f87dddef49b4b98ba74e92218, type: 3}
+      propertyPath: audioWalkOnBones4
+      value: 
+      objectReference: {fileID: 8300000, guid: 13284f65c7a22604e9ed62eeffc4f05d, type: 3}
+    - target: {fileID: 7956689877235174920, guid: 1e7aa36f87dddef49b4b98ba74e92218, type: 3}
+      propertyPath: audioWalkOnStone1
+      value: 
+      objectReference: {fileID: 8300000, guid: d1a1af4dca753c94d9a3aea2a16e5ac1, type: 3}
+    - target: {fileID: 7956689877235174920, guid: 1e7aa36f87dddef49b4b98ba74e92218, type: 3}
+      propertyPath: audioWalkOnStone2
+      value: 
+      objectReference: {fileID: 8300000, guid: 76d9ffc6d22ce3546b288ac053f7867a, type: 3}
+    - target: {fileID: 7956689877235174920, guid: 1e7aa36f87dddef49b4b98ba74e92218, type: 3}
+      propertyPath: audioWalkOnStone3
+      value: 
+      objectReference: {fileID: 8300000, guid: 0ce139d559651fb47b02deb0238e22c5, type: 3}
+    - target: {fileID: 7956689877235174920, guid: 1e7aa36f87dddef49b4b98ba74e92218, type: 3}
+      propertyPath: audioWalkOnStone4
+      value: 
+      objectReference: {fileID: 8300000, guid: 3c901706d1502054e9150543067918e6, type: 3}
+    - target: {fileID: 7956689877235174920, guid: 1e7aa36f87dddef49b4b98ba74e92218, type: 3}
       propertyPath: audioClipWalkOnBones
       value: 
       objectReference: {fileID: 8300000, guid: a9cc1b42d8168484ba29f3eaa8d7cd42, type: 3}
@@ -557,7 +589,7 @@ MonoBehaviour:
   GotKey1: 0
   GotKey2: 0
   GotKey3: 0
-  currentGroundWalkingAudio: {fileID: 0}
+  currentGroundWalkingCategory: none by default
 --- !u!4 &1360535582
 Transform:
   m_ObjectHideFlags: 0
