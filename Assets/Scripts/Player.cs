@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class Player : MonoBehaviour
@@ -27,24 +28,40 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
+    [SerializeField] private InputAction move;
+    //[SerializeField] private InputAction run;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-
+        move.Enable();
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
+    bool isRunning = false;
+    float verticalInput = 0;
+    float horizontalInput = 0;
+
     void Update()
     {
+        // Handle Input
+        //if (move.triggered)
+        //{
+        //    Debug.Log($"Action triggered!" + move.ReadValue<Vector2>());
+            
+        //}
+        verticalInput = move.ReadValue<Vector2>().y;
+        horizontalInput = move.ReadValue<Vector2>().x;
+
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
-        // Press Left Shift to run
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
+        // Press Left Shift to run (disable for now, we dont use it from a game design perspective
+        //isRunning = Input.GetKey(KeyCode.LeftShift);
+        float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * verticalInput /*Input.GetAxis("Vertical")*/ : 0;
+        float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * horizontalInput /*Input.GetAxis("Horizontal")*/ : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
@@ -149,31 +166,4 @@ public class Player : MonoBehaviour
         }
     }
 
-
-
-    //public float SpeedPlayer = 3;
-    //public float SensibilityCamera = 5;
-    //private Rigidbody _rb;
-
-    //// Use this for initialization
-    //void Start()
-    //{
-    //    //Set Cursor to not be visible
-    //    Cursor.lockState = CursorLockMode.Locked;
-    //    _rb = GetComponent<Rigidbody>();
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    float x = Input.GetAxis("Horizontal");
-    //    float z = Input.GetAxis("Vertical");
-
-    //    Vector3 movement = new Vector3(x, 0, z);
-    //    transform.Translate(movement.normalized * SpeedPlayer * Time.deltaTime);
-    //    //_rb.MovePosition(this.transform.position + movement.normalized * SpeedPlayer * Time.deltaTime);
-
-    //    float horizontalCam = SensibilityCamera * Input.GetAxis("Mouse X");
-    //    transform.Rotate(0, horizontalCam, 0);
-    //}
 }
