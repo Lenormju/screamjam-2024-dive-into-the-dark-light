@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour {
     public string currentGroundWalkingCategory = "none by default";  // the audio clip of the noisy groudn we are currently working on
     public GlobalMusic globalMusic;
 
+    void Start() {
+        StartAmbientMusic();
+    }
+
 
     [SerializeField] private Animator deathAnim;
     [SerializeField] private Animator deathAnimSpider;

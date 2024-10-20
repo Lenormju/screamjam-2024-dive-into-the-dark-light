@@ -60,6 +60,7 @@ public class Door : MonoBehaviour
         {
             PushSlider.gameObject.SetActive(true);
             PushSlider.value = pushAmount;
+            GameManager.Instance.StartBangingDoorMusic();
         }
         else if (PushSlider != null)
         {
