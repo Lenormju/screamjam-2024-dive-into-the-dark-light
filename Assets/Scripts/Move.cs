@@ -134,18 +134,18 @@ public class Move : MonoBehaviour
         }
         //Debug.Log("isNoisy=" + isNoisy + " isActuallyMoving=" + isActuallyMoving + " isPlaying=" + playerWalking.isPlaying);
         if (isNoisy && isActuallyMoving) {
-            if (playerWalking.isPlaying) {
-                // keep playing
-                // TODO: changer de son si on change de ground
-                //Debug.Log("already playing");
+            AudioResource currentGroundWalkingAudio = GameManager.Instance.currentGroundWalkingAudio;
+            if (playerWalking.isPlaying && (currentGroundWalkingAudio == audioToPlay)) {
+                Debug.Log("keep playing");
             } else {
                 playerWalking.resource = audioToPlay;
+                GameManager.Instance.currentGroundWalkingAudio = audioToPlay;
                 playerWalking.Play();
-                //Debug.Log("play");
+                Debug.Log("play " + audioToPlay);
             }
         } else {
             playerWalking.Stop();
-            //Debug.Log("stop");
+            Debug.Log("stop");
         }
     }
 
