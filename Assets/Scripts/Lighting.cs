@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Timers;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Lighting : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Lighting : MonoBehaviour
     public int BorneMaxToActivated = 10;
 
     public float SecondActivated = 1;
+
+    public AudioSource thunderAudioSource = null;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,12 +34,12 @@ public class Lighting : MonoBehaviour
         _countSeconds += Time.deltaTime;
         // si pas activé , active au bout de X secondes
         if (_isActivated == false && _countSeconds >= _activateSeconds){
-            Debug.Log("Bouuuuuh!");
+            //Debug.Log("Bouuuuuh!");
             PlayWithLight(true);
         }
         // si activé, désactive au bout de X seconde
         else if(_isActivated == true && _countSeconds >= SecondActivated){
-            Debug.Log("You Cant See Me!");            
+            //Debug.Log("You Cant See Me!");            
             PlayWithLight(false);
         }
     }
@@ -46,5 +49,10 @@ public class Lighting : MonoBehaviour
         _isActivated = toActivated;
         _myLight.enabled = toActivated;
         _activateSeconds = _rnd.Next(BorneMinToActivated, BorneMaxToActivated);
+        if (toActivated) {
+            System.Random rnd = new System.Random();
+            float delay  = (float) (rnd.NextDouble() * 2) + 1;  // between 1 and 3
+            thunderAudioSource.Play((ulong) (delay * 44100)); // delay in samping rate
+        }
     }
 }
