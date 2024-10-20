@@ -25567,10 +25567,6 @@ PrefabInstance:
       propertyPath: keys_nb_display
       value: 
       objectReference: {fileID: 1926826201}
-    - target: {fileID: 3147491887898335368, guid: a6e8bc6cddec59e46bed4390fabc5c6b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5948936571411422937, guid: a6e8bc6cddec59e46bed4390fabc5c6b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

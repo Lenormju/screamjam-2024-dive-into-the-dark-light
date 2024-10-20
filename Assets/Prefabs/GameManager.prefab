@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAudioSource: {fileID: 9209642119686435103}
-  ambientAudio: {fileID: 8300000, guid: 0c88a6aa77e562049b18c30e884a7e94, type: 3}
+  ambientAudio: {fileID: 8300000, guid: 6e652d408a725c947bb3403f2a34f11a, type: 3}
   playerRunningAudio: {fileID: 8300000, guid: e1cf80e03536e424d96831ab2e546aea, type: 3}
   playerBangingDoorAudio: {fileID: 8300000, guid: 4f4dc41656e40264cbc97ed18f38960d, type: 3}
 --- !u!1 &8453547496528532488
@@ -198,4 +198,8 @@ MonoBehaviour:
   currentGroundWalkingCategory: none by default
   globalMusic: {fileID: 9121294443738534297}
   deathAnim: {fileID: 0}
+  deathAnimSpider: {fileID: 0}
+  keys_nb_display: {fileID: 0}
+  key_image: {fileID: 0}
+  final_boss: 0
   nb_keys: 0
