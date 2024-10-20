@@ -9,6 +9,7 @@ public class SettingMenu : MonoBehaviour
     public AudioMixer audioMixer;
     public Slider slider;
     public float mouseSensitivity = 100f;
+    public AudioSource plopVolumeTest;
 
     void Start()
     {
@@ -28,7 +29,11 @@ public class SettingMenu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("volume", volume);
+        audioMixer.SetFloat("volume", Mathf.Log10(volume) * 20);  // https://gamedevbeginner.com/10-unity-audio-tips-that-you-wont-find-in-the-tutorials-2/#volume_sliders
+        //audioMixer.SetFloat("volume", volume);
+        if (!plopVolumeTest.isPlaying) {
+            plopVolumeTest.Play();
+        }
     }
 
     public void SetFullScreen(bool isFullScreen)
