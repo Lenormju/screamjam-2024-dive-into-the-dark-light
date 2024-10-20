@@ -18,6 +18,7 @@ public class Door : MonoBehaviour
     [SerializeField] private int nb_keys_needed = 0;
     private bool is_in_range = false;
     private bool is_door_open = false;
+    [SerializeField] private bool is_unlocked = false;
     private Animator animator;
 
     /// Start is called on the frame when a script is enabled just before
@@ -34,16 +35,25 @@ public class Door : MonoBehaviour
             if (!is_door_open)
             {
                 pushAmount += amountOnClick;
-                if (GameManager.Instance.nb_keys < nb_keys_needed) {
+                if (is_unlocked)
+                {
+                    animator.SetTrigger("openingDoor");
+                    is_door_open = true;
+                    doorAudioSource.PlayOneShot(doorOpeningSound);
+                }
+                else if (GameManager.Instance.nb_keys < nb_keys_needed) {
                     //Debug.Log("pas assez de keys, still locked");
                     doorAudioSource.PlayOneShot(doorLockedSound);
-                } else if (pushAmount >= amountToOpen && GameManager.Instance.nb_keys >= nb_keys_needed)
+                } 
+                else if (pushAmount >= amountToOpen && GameManager.Instance.nb_keys >= nb_keys_needed)
                 {
+                    is_unlocked = true;
                     GameManager.Instance.RemoveKey(nb_keys_needed);
                     animator.SetTrigger("openingDoor");
                     is_door_open = true;
                     doorAudioSource.PlayOneShot(doorOpeningSound);
                 }
+                
             }
             else if (pushAmount <= 0)
             {
