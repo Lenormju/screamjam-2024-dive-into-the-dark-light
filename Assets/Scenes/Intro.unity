@@ -738,12 +738,12 @@ MonoBehaviour:
     You wake up in a small, dark and damp cell.
 
     You hear
-    strange and creepy nois ecoming from the nearby corridors.
+    strange and creepy noises coming from the nearby corridors.
 
     You know one
     thing:
 
-    you have to exit you cell, explore the undergrounds to find a way
+    you have to exit you cell, explore the underground to find a way
     to...'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: beb2e4a7d9e8aef4985891c1f44253a0, type: 2}
