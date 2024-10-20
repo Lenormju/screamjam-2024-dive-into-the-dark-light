@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void InvokeKey2(){
+        EventKey2?.Invoke(this, EventArgs.Empty);
+    }
+
     void Awake() {
          Time.timeScale = 1;
          isGamePaused = false;
