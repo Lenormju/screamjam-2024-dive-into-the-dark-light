@@ -1,3 +1,4 @@
+using System;
 using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour {
     public bool GotKey1 = false;
     public bool GotKey2 = false;
     public bool GotKey3 = false;
+    public event EventHandler EventKey2;
+
     public AudioResource currentGroundWalkingAudio = null;  // the audio clip of the noisy groudn we are currently working on
 
     public void DisplayEndScreen()
