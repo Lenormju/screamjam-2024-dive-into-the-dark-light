@@ -176,7 +176,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Cr\xE9dits\n"
+  m_text: 'Credits
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: beb2e4a7d9e8aef4985891c1f44253a0, type: 2}
   m_sharedMaterial: {fileID: -583376818593714201, guid: beb2e4a7d9e8aef4985891c1f44253a0, type: 2}
@@ -448,10 +450,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Florian \"Floria\" BARROIS (Light Designer / Developer)\nLou \"LouLou\"
+  m_text: "Florian \"DoDiez\" BARROIS (Light Designer / Developer)\nLou \"LouLou\"
     B\xC9G\xC9 (Light Designer / Developer)\nAdrien \"Adri2\" GLEMBA (Beginner /
     Developer)\nJulien \"L'\xE9paule\" LENORMAND (Sound Developer / Sound Effect
-    Expert)\nJibril \"Vomito\" MAMMERI (Assets Designer)\nMatthieu \"T\xE9l\xE9phonneMaison\"
+    Expert)\nJibril \"AlwaysHere\" MAMMERI (Assets Designer)\nMatthieu \"T\xE9l\xE9phoneMaison\"
     MATRINGE (L'or Master)\nEric \"Eurk\" PAPAZIAN (Chef de Projet / Merge Master)\nValentin
     \"Maestro\" PARIOT (Sound Designer / Sound Effect Expert)\nJulien \"TapeSurLesNerfs\"
     PINJON (Level Designer / Happiness Manager)"
