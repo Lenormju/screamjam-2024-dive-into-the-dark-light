@@ -14,6 +14,7 @@ public class triggerMechant : MonoBehaviour
         if (other.tag == "Player")
         {
             mechant.SetActive(true);
+            GameManager.Instance.StartRunningMusic();
         }
     }
 }
