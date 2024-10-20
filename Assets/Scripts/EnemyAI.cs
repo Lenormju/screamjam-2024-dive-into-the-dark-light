@@ -7,19 +7,45 @@ public class EnemyAI : MonoBehaviour
     private int currentPatrolPoint = 1;
     [SerializeField] private Vector3 patrollingPos1;
     [SerializeField] private Vector3 patrollingPos2;
+    private SphereCollider scentCollider;
+    [SerializeField] private float killRange = 3f;
+    [SerializeField] private SphereCollider killCollider;
 
     private NavMeshAgent _agent;
-    private bool hasDetectedPlayer = true;
+    private bool chasingPlayer = false;
     void Start() {
         _agent = GetComponent<NavMeshAgent>();
-        //GameManager.Instance.Player.OnNoise += onNoiseEmitted;
+        scentCollider = GetComponent<SphereCollider>();
+        killCollider.radius = killRange;
+        scentCollider.radius = scentRange;
+        GameManager.Instance.Player.OnNoise += onNoiseEmitted;
     }
     void Update() {
-        if (!_agent.isOnNavMesh) return; 
+        if (!_agent.isOnNavMesh) return;
 
-        if (hasDetectedPlayer) {
+        _timerWaitOnPlace -= Time.deltaTime;
+        if (!hasTarget && _timerWaitOnPlace < 0) {
+            chasingPlayer = false;
+            hasTarget = false;
+        }
+
+        SetTarget();
+    }
+
+    void SetTarget() {
+        if (_timerWaitOnPlace > 0) { // Wait if lost player
+            _agent.ResetPath();
+            return;
+        }
+
+        if (chasingPlayer) { // Chasing player
             _agent.destination = GameManager.Instance.Player.transform.position;
-        } else if (isPatrolling) {
+        } else if (hasTarget && !chasingPlayer) { // Chasing noise
+            if (soundTarget != null && IsCloseEnough(transform.position, soundTarget.position)) {
+                LostTarget();
+                soundTarget = null;
+            }
+        } else if (isPatrolling) { // Default patrolling
             HandlingSwitchPatrolPoint();
 
             if (currentPatrolPoint == 1) {
@@ -30,7 +56,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
     void OnDestroy() {
-        //GameManager.Instance.Player.OnNoise -= onNoiseEmitted;
+        GameManager.Instance.Player.OnNoise -= onNoiseEmitted;
     }
 
     void HandlingSwitchPatrolPoint() {
@@ -49,8 +75,36 @@ public class EnemyAI : MonoBehaviour
         return Vector3.Distance(pos1, pos2) < distCloseEnough;
     }
 
+    private Transform soundTarget = null;
     void onNoiseEmitted(Transform noise, float intensity) {
         Debug.Log("noise received: " + noise);
+        hasTarget = true;
+        _timerWaitOnPlace = 0;
+        soundTarget = noise;
     }
 
+    [SerializeField] private float scentRange = 5f;
+    [SerializeField] private float timeWaitOnPlaceWhenLostTarget = 3f;
+    private float _timerWaitOnPlace = 0;
+    private bool hasTarget = false;
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag == "Player") {
+            chasingPlayer = true;
+            hasTarget = true;
+            _timerWaitOnPlace = 0;
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (other.tag == "Player") {
+            Debug.Log("Lost" + other.tag);
+            LostTarget();
+        }
+    }
+
+    private void LostTarget() {
+        hasTarget = false;
+        chasingPlayer = false;
+        _timerWaitOnPlace = timeWaitOnPlaceWhenLostTarget;
+    }
 }
