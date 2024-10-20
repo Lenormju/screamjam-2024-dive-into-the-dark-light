@@ -4,15 +4,13 @@ using UnityEngine.Audio;
 
 public class PopEventKey : MonoBehaviour
 {
-    private GameObject MyObject;
-    private AudioSource AudioSource;
+    public GameObject MyObject;
+    public AudioSource AudioSource;
     public bool SetActive;
 
     void Start()
     {
-        MyObject = GetComponent<GameObject>();
-        AudioSource = GetComponent<AudioSource>();
-
+        MyObject.SetActive(!SetActive);
         GameManager.Instance.EventKey2 += DisplayObject;
     }
 
