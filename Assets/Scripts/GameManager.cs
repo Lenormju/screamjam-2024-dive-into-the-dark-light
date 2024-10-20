@@ -31,13 +31,27 @@ public class GameManager : MonoBehaviour {
 
 
     [SerializeField] private Animator deathAnim;
+    [SerializeField] private Animator deathAnimSpider;
     public TextMeshProUGUI keys_nb_display;
     public GameObject key_image;
+
+    public bool final_boss = false;
 
     public void DisplayEndScreen()
     {
         Debug.Log("fin du  game");
-        deathAnim.SetTrigger("displayGameOver");
+        if (final_boss)
+        {
+            deathAnimSpider.gameObject.SetActive(true);
+            deathAnim.gameObject.SetActive(false);
+            deathAnimSpider.SetTrigger("displayGameOver");
+        }
+        else
+        {
+            deathAnimSpider.gameObject.SetActive(false);
+            deathAnim.gameObject.SetActive(true);
+            deathAnim.SetTrigger("displayGameOver");
+        }
         SetCursorActive(true);
     }
 

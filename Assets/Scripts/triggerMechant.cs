@@ -15,5 +15,6 @@ public class triggerMechant : MonoBehaviour
         {
             mechant.SetActive(true);
         }
+        GameManager.Instance.final_boss = true;
     }
 }

@@ -30,9 +30,9 @@ public class AudioSourceRaycasting : MonoBehaviour
         }
 
         if (is_player_visible) {
-            this._audio_source.volume = 0.5F;
+            this._audio_source.volume = 0.8F;
         } else {
-            this._audio_source.volume = 0.1F;
+            this._audio_source.volume = 0.5F;
         }
     }
 }
