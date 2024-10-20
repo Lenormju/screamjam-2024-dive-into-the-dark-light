@@ -6,7 +6,7 @@ public class Blinking : MonoBehaviour
     private float timerBetweenFailingLights = 15;
     private float timerBetweenBlinks = 666;
     private int currentBlink = 0;
-    private int maxBlink = 4;
+    //private int maxBlink = 4;
     private bool isBlinking = false;
 
     [SerializeField] private float minTimeBlink = 0.02f;

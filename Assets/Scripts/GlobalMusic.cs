@@ -20,17 +20,17 @@ public class GlobalMusic : MonoBehaviour
         
     }
 
-    void StartAmbientMusic() {
+    public void StartAmbientMusic() {
         playerAudioSource.resource = ambientAudio;
         playerAudioSource.Play();
     }
 
-    void StartRunningMusic() {
+    public void StartRunningMusic() {
         playerAudioSource.resource = playerRunningAudio;
         playerAudioSource.Play();
     }
 
-    void StartBangingDoorMusic() {
+    public void StartBangingDoorMusic() {
         playerAudioSource.resource = playerBangingDoorAudio;
         playerAudioSource.Play();
     }
