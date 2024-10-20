@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     public event Action<Transform, float> OnNoise;
 
-    public AudioResource audioWalkOnStone1;
+    //public AudioResource audioWalkOnStone1;  // unavailable
     public AudioResource audioWalkOnStone2;
     public AudioResource audioWalkOnStone3;
     public AudioResource audioWalkOnStone4;
@@ -166,14 +166,12 @@ public class Player : MonoBehaviour
                 Debug.Log("error value from random");
             }
         } else if (isGroundStoneHit) {
-            int sound  = rnd.Next(1, 5);  
+            int sound  = rnd.Next(1, 4);  
             if (sound == 1) {
-                audioToPlay = audioWalkOnStone1;
-            } else if (sound == 2) {
                 audioToPlay = audioWalkOnStone2;
-            } else if (sound == 3) {
+            } else if (sound == 2) {
                 audioToPlay = audioWalkOnStone3;
-            } else if (sound == 4) {
+            } else if (sound == 3) {
                 audioToPlay = audioWalkOnStone4;
             } else {
                 Debug.Log("error value from random");

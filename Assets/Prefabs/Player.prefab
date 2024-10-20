@@ -344,8 +344,8 @@ Light:
   m_Type: 0
   m_Color: {r: 0.8113208, g: 0.5344902, b: 0.4554112, a: 1}
   m_Intensity: 50
-  m_Range: 5
-  m_SpotAngle: 179
+  m_Range: 10
+  m_SpotAngle: 75
   m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
@@ -677,7 +677,7 @@ Transform:
   m_GameObject: {fileID: 6579292530288055646}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.64, z: 0}
+  m_LocalPosition: {x: 0, y: 0.751, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -798,9 +798,10 @@ GameObject:
   - component: {fileID: 1448563138111241180}
   - component: {fileID: 7956689877235174920}
   - component: {fileID: 4500104048722513475}
+  - component: {fileID: 2360179730014296965}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -815,7 +816,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.137, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1235776424635341684}
@@ -837,14 +838,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4caa1139ab4d4654da2654de51679b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 3
+  walkingSpeed: 8
   runningSpeed: 4
   jumpSpeed: 8
   gravity: 20
   playerCamera: {fileID: 8496925286124033729}
   lookSpeed: 2
   lookXLimit: 45
-  audioWalkOnStone1: {fileID: 8300000, guid: d1a1af4dca753c94d9a3aea2a16e5ac1, type: 3}
   audioWalkOnStone2: {fileID: 8300000, guid: 76d9ffc6d22ce3546b288ac053f7867a, type: 3}
   audioWalkOnStone3: {fileID: 8300000, guid: 0ce139d559651fb47b02deb0238e22c5, type: 3}
   audioWalkOnStone4: {fileID: 8300000, guid: 3c901706d1502054e9150543067918e6, type: 3}
@@ -854,6 +854,55 @@ MonoBehaviour:
   audioWalkOnBones4: {fileID: 8300000, guid: 13284f65c7a22604e9ed62eeffc4f05d, type: 3}
   playerWalking: {fileID: 7926569025120104184}
   canMove: 1
+  move:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d56b8dea-da96-44f6-8a24-b200f8916a22
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 2D Vector
+      m_Id: 46ae69be-bedb-4269-9f40-e2cbb381996b
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 99ee6fd8-d3e3-4130-af9b-e8657de62faa
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 5bb1c579-a86d-4083-9412-2e27ce2e4569
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 91d3ca6b-ad26-49f4-ac7a-03d25f7f7e6f
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: d2ec4c56-5fcc-4633-b5b7-6bae6e2510cc
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    m_Flags: 0
 --- !u!143 &4500104048722513475
 CharacterController:
   m_ObjectHideFlags: 0
@@ -879,3 +928,17 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2360179730014296965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8888023826967625145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 190695dc617b731458e8e436dde6c536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keys_nb_display: {fileID: 0}
+  key_image: {fileID: 0}

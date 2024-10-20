@@ -340,6 +340,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7956689877235174920, guid: 1e7aa36f87dddef49b4b98ba74e92218, type: 3}
+      propertyPath: audioWalkOnBones4
+      value: 
+      objectReference: {fileID: 8300000, guid: c2f8ec1f0c6f01c4a90e84e04388e6ed, type: 3}
     - target: {fileID: 8888023826967625145, guid: 1e7aa36f87dddef49b4b98ba74e92218, type: 3}
       propertyPath: m_Name
       value: Player
@@ -394,6 +398,7 @@ MonoBehaviour:
   GotKey2: 0
   GotKey3: 0
   currentGroundWalkingCategory: none by default
+  nb_keys: 0
 --- !u!4 &1360535582
 Transform:
   m_ObjectHideFlags: 0
