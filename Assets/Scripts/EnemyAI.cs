@@ -39,15 +39,21 @@ public class EnemyAI : MonoBehaviour
         }
 
         if (chasingPlayer) { // Chasing player
+            Debug.Log("Target player");
             _agent.destination = GameManager.Instance.Player.transform.position;
         } else if (hasTarget && !chasingPlayer) { // Chasing noise
-            if (soundTarget != null && IsCloseEnough(transform.position, soundTarget.position)) {
-                LostTarget();
-                soundTarget = null;
+            if (soundTarget != null && hasTarget) {
+                Debug.Log("Target sound");
+                _agent.destination = soundTarget.position;
+                if (IsCloseEnough(transform.position, soundTarget.position)) {
+                    LostTarget();
+                    soundTarget = null;
+                    _agent.ResetPath();
+                }
             }
         } else if (isPatrolling) { // Default patrolling
             HandlingSwitchPatrolPoint();
-
+            Debug.Log("Patrolling to " + currentPatrolPoint);
             if (currentPatrolPoint == 1) {
                 _agent.destination = patrollingPos1;
             } else {
@@ -77,7 +83,6 @@ public class EnemyAI : MonoBehaviour
 
     private Transform soundTarget = null;
     void onNoiseEmitted(Transform noise, float intensity) {
-        Debug.Log("noise received: " + noise + " " + intensity);
         hasTarget = true;
         _timerWaitOnPlace = 0;
         soundTarget = noise;

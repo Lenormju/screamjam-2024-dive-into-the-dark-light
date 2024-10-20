@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class Player : MonoBehaviour
@@ -16,8 +17,14 @@ public class Player : MonoBehaviour
 
     public event Action<Transform, float> OnNoise;
 
-    public AudioResource audioWalkOnStone;
-    public AudioResource audioWalkOnBones;
+    //public AudioResource audioWalkOnStone1;  // unavailable
+    public AudioResource audioWalkOnStone2;
+    public AudioResource audioWalkOnStone3;
+    public AudioResource audioWalkOnStone4;
+    public AudioResource audioWalkOnBones1;
+    public AudioResource audioWalkOnBones2;
+    public AudioResource audioWalkOnBones3;
+    public AudioResource audioWalkOnBones4;
     public AudioSource playerWalking;
 
     CharacterController characterController;
@@ -27,24 +34,39 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
+    [SerializeField] private InputAction move;
+    //[SerializeField] private InputAction run;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-
+        move.Enable();
         // Lock cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        GameManager.Instance.SetCursorActive(false);
     }
+
+    bool isRunning = false;
+    float verticalInput = 0;
+    float horizontalInput = 0;
 
     void Update()
     {
+        // Handle Input
+        //if (move.triggered)
+        //{
+        //    Debug.Log($"Action triggered!" + move.ReadValue<Vector2>());
+            
+        //}
+        verticalInput = move.ReadValue<Vector2>().y;
+        horizontalInput = move.ReadValue<Vector2>().x;
+
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
-        // Press Left Shift to run
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
+        // Press Left Shift to run (disable for now, we dont use it from a game design perspective
+        //isRunning = Input.GetKey(KeyCode.LeftShift);
+        float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * verticalInput /*Input.GetAxis("Vertical")*/ : 0;
+        float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * horizontalInput /*Input.GetAxis("Horizontal")*/ : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
@@ -88,6 +110,7 @@ public class Player : MonoBehaviour
         bool isGroundStoneHit = false; // by default
         bool isNoisy = false;  // by default
         float noiseVolume = 0.0F;  // by default
+        string groundCategory = "none by default";  // by default
         if (hasHitSomething) {
             //Debug.Log("hit something: " + hit.transform + " " + hit.point);
             if (hit.transform.tag == "Bones") {
@@ -95,11 +118,13 @@ public class Player : MonoBehaviour
                 isGroundBoneHit = true;
                 noiseVolume = 0.8F;
                 isNoisy = true;
+                groundCategory = hit.transform.tag;
             } else if (hit.transform.tag == "Stone") {
                 //Debug.Log("hit groundStone");
                 isGroundStoneHit = true;
                 noiseVolume = 0.2F;
                 isNoisy = true;
+                groundCategory = hit.transform.tag;
             } else {
                 //Debug.Log("hit something else than groundBone/groundStone");
             }
@@ -122,31 +147,50 @@ public class Player : MonoBehaviour
         } else {
             // rien
         }
-
-        // si on marche, alors on entend du brouit dans les haut-parleurs
         float newSpeed = walkingSpeed;
+        System.Random rnd = new System.Random();
+        // sélectionner le bruit à jouer
         AudioResource audioToPlay = null;  // by default
         if (isGroundBoneHit) {
             newSpeed = walkingSpeed/2;
-            audioToPlay = audioWalkOnBones;
-        } else if (isGroundStoneHit) {            
+            int sound  = rnd.Next(1, 5);  
+            if (sound == 1) {
+                audioToPlay = audioWalkOnBones1;
+            } else if (sound == 2) {
+                audioToPlay = audioWalkOnBones2;
+            } else if (sound == 3) {
+                audioToPlay = audioWalkOnBones3;
+            } else if (sound == 4) {
+                audioToPlay = audioWalkOnBones4;
+            } else {
+                Debug.Log("error value from random");
+            }
+        } else if (isGroundStoneHit) {
             newSpeed = walkingSpeed*2;
-            audioToPlay = audioWalkOnStone;
+            int sound  = rnd.Next(1, 4);  
+            if (sound == 1) {
+                audioToPlay = audioWalkOnStone2;
+            } else if (sound == 2) {
+                audioToPlay = audioWalkOnStone3;
+            } else if (sound == 3) {
+                audioToPlay = audioWalkOnStone4;
+            } else {
+                Debug.Log("error value from random");
+            }
         } else {
             // pas de ground bruyant, pas de bruit
         }
         //Debug.Log("isNoisy=" + isNoisy + " isActuallyMoving=" + isActuallyMoving + " isPlaying=" + playerWalking.isPlaying);
         if (isNoisy && isActuallyMoving) {
-            AudioResource currentGroundWalkingAudio = GameManager.Instance.currentGroundWalkingAudio;
-            if(currentGroundWalkingAudio != audioToPlay){
+            string currentGroundWalkingCategory = GameManager.Instance.currentGroundWalkingCategory;
+             if(currentGroundWalkingCategory != groundCategory){
                 walkingSpeed = newSpeed;
             }
-
-            if (playerWalking.isPlaying && (currentGroundWalkingAudio == audioToPlay)) {
+            if (playerWalking.isPlaying && (currentGroundWalkingCategory == groundCategory)) {
                 //Debug.Log("keep playing");
-            } else {
+            } else if (!GameManager.Instance.isGamePaused) {
                 playerWalking.resource = audioToPlay;
-                GameManager.Instance.currentGroundWalkingAudio = audioToPlay;
+                GameManager.Instance.currentGroundWalkingCategory = groundCategory;
                 playerWalking.Play();
                 //Debug.Log("play " + audioToPlay);
             }            
@@ -156,31 +200,4 @@ public class Player : MonoBehaviour
         }
     }
 
-
-
-    //public float SpeedPlayer = 3;
-    //public float SensibilityCamera = 5;
-    //private Rigidbody _rb;
-
-    //// Use this for initialization
-    //void Start()
-    //{
-    //    //Set Cursor to not be visible
-    //    Cursor.lockState = CursorLockMode.Locked;
-    //    _rb = GetComponent<Rigidbody>();
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    float x = Input.GetAxis("Horizontal");
-    //    float z = Input.GetAxis("Vertical");
-
-    //    Vector3 movement = new Vector3(x, 0, z);
-    //    transform.Translate(movement.normalized * SpeedPlayer * Time.deltaTime);
-    //    //_rb.MovePosition(this.transform.position + movement.normalized * SpeedPlayer * Time.deltaTime);
-
-    //    float horizontalCam = SensibilityCamera * Input.GetAxis("Mouse X");
-    //    transform.Rotate(0, horizontalCam, 0);
-    //}
 }
