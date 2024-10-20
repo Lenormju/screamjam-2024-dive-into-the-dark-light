@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour {
     public bool GotKey2 = false;
     public bool GotKey3 = false;
     public string currentGroundWalkingCategory = "none by default";  // the audio clip of the noisy groudn we are currently working on
+    public GlobalMusic globalMusic;
 
 
     [SerializeField] private Animator deathAnim;
@@ -78,6 +79,18 @@ public class GameManager : MonoBehaviour {
             Cursor.visible = true;
         }
         
+    }
+
+    public void StartAmbientMusic() {
+       globalMusic.StartAmbientMusic();
+    }
+
+    public void StartRunningMusic() {
+        globalMusic.StartRunningMusic();
+    }
+
+    public void StartBangingDoorMusic() {
+        globalMusic.StartBangingDoorMusic();
     }
 
 }
