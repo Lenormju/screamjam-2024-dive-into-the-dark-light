@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 4938244439111105626}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
+  m_LocalPosition: {x: 0, y: 0.43, z: 0}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1083442078647279287}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b56f2f1b8d734ea45a869eceaa33b011, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 976721915922a3342886c2b5e5d58cca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 7577978011662299483}
   - component: {fileID: 7481237230927470857}
   - component: {fileID: 2459640747685276127}
+  - component: {fileID: 1735202625695698828}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -167,7 +168,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2.5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -191,4 +192,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b20a449e2116e34bb92b98a42e065f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPos: {fileID: 0}
+  isPatrolling: 1
+  patrollingPos1: {x: -2, y: 0, z: 8}
+  patrollingPos2: {x: 12, y: 0, z: 8}
+  distCloseEnough: 1
+  scentRange: 5
+  timeWaitOnPlaceWhenLostTarget: 3
+--- !u!135 &1735202625695698828
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6249897987017120167}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
