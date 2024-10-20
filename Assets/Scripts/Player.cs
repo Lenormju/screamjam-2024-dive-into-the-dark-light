@@ -124,10 +124,13 @@ public class Player : MonoBehaviour
         }
 
         // si on marche, alors on entend du brouit dans les haut-parleurs
+        float newSpeed = walkingSpeed;
         AudioResource audioToPlay = null;  // by default
         if (isGroundBoneHit) {
+            newSpeed = walkingSpeed/2;
             audioToPlay = audioWalkOnBones;
-        } else if (isGroundStoneHit) {
+        } else if (isGroundStoneHit) {            
+            newSpeed = walkingSpeed*2;
             audioToPlay = audioWalkOnStone;
         } else {
             // pas de ground bruyant, pas de bruit
@@ -135,6 +138,10 @@ public class Player : MonoBehaviour
         //Debug.Log("isNoisy=" + isNoisy + " isActuallyMoving=" + isActuallyMoving + " isPlaying=" + playerWalking.isPlaying);
         if (isNoisy && isActuallyMoving) {
             AudioResource currentGroundWalkingAudio = GameManager.Instance.currentGroundWalkingAudio;
+            if(currentGroundWalkingAudio != audioToPlay){
+                walkingSpeed = newSpeed;
+            }
+
             if (playerWalking.isPlaying && (currentGroundWalkingAudio == audioToPlay)) {
                 //Debug.Log("keep playing");
             } else {
@@ -142,7 +149,7 @@ public class Player : MonoBehaviour
                 GameManager.Instance.currentGroundWalkingAudio = audioToPlay;
                 playerWalking.Play();
                 //Debug.Log("play " + audioToPlay);
-            }
+            }            
         } else {
             playerWalking.Stop();
             //Debug.Log("stop");
