@@ -23233,7 +23233,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.083333336
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 274d140bd72f73b43b7350cecc40ffab, type: 2}
   m_BuildHeightMesh: 0
@@ -25435,7 +25435,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.083333336
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 2e9ccd331545750438b093e8d168a694, type: 2}
   m_BuildHeightMesh: 0
@@ -25559,6 +25559,14 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1869157572}
+    - target: {fileID: 551582583997517848, guid: a6e8bc6cddec59e46bed4390fabc5c6b, type: 3}
+      propertyPath: key_image
+      value: 
+      objectReference: {fileID: 1724282771}
+    - target: {fileID: 551582583997517848, guid: a6e8bc6cddec59e46bed4390fabc5c6b, type: 3}
+      propertyPath: keys_nb_display
+      value: 
+      objectReference: {fileID: 1926826201}
     - target: {fileID: 5948936571411422937, guid: a6e8bc6cddec59e46bed4390fabc5c6b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
