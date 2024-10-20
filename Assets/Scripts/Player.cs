@@ -133,20 +133,19 @@ public class Player : MonoBehaviour
             // pas de ground bruyant, pas de bruit
         }
         //Debug.Log("isNoisy=" + isNoisy + " isActuallyMoving=" + isActuallyMoving + " isPlaying=" + playerWalking.isPlaying);
-        if (playerWalking == null) return;
         if (isNoisy && isActuallyMoving) {
             AudioResource currentGroundWalkingAudio = GameManager.Instance.currentGroundWalkingAudio;
             if (playerWalking.isPlaying && (currentGroundWalkingAudio == audioToPlay)) {
-                Debug.Log("keep playing");
+                //Debug.Log("keep playing");
             } else {
                 playerWalking.resource = audioToPlay;
                 GameManager.Instance.currentGroundWalkingAudio = audioToPlay;
                 playerWalking.Play();
-                Debug.Log("play " + audioToPlay);
+                //Debug.Log("play " + audioToPlay);
             }
         } else {
             playerWalking.Stop();
-            Debug.Log("stop");
+            //Debug.Log("stop");
         }
     }
 
