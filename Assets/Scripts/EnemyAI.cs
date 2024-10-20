@@ -77,7 +77,7 @@ public class EnemyAI : MonoBehaviour
 
     private Transform soundTarget = null;
     void onNoiseEmitted(Transform noise, float intensity) {
-        Debug.Log("noise received: " + noise);
+        Debug.Log("noise received: " + noise + " " + intensity);
         hasTarget = true;
         _timerWaitOnPlace = 0;
         soundTarget = noise;
