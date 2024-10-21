@@ -20,6 +20,8 @@ public class Door : MonoBehaviour
     private bool is_door_open = false;
     [SerializeField] private bool is_unlocked = false;
     private Animator animator;
+    private bool QTEstarted = false;
+    private bool isAnimating = false;
 
     /// Start is called on the frame when a script is enabled just before
     private void Start()
@@ -32,7 +34,7 @@ public class Door : MonoBehaviour
     {
         if (is_in_range && Input.GetMouseButtonDown(0))
         {
-            if (!is_door_open)
+            if (!is_door_open && !isAnimating)
             {
                 pushAmount += amountOnClick;
                 if (is_unlocked)
@@ -47,6 +49,7 @@ public class Door : MonoBehaviour
                 } 
                 else if (pushAmount >= amountToOpen && GameManager.Instance.nb_keys >= nb_keys_needed)
                 {
+                    isAnimating = true;
                     is_unlocked = true;
                     GameManager.Instance.RemoveKey(nb_keys_needed);
                     animator.SetTrigger("openingDoor");
@@ -55,9 +58,10 @@ public class Door : MonoBehaviour
                 }
                 
             }
-            else if (pushAmount <= 0)
+            else if (pushAmount <= 0 && !isAnimating)
             {
                 //Debug.Log("closing");
+                isAnimating = true;
                 animator.SetTrigger("closingDoor");
                 is_door_open = false;
                 doorAudioSource.PlayOneShot(doorClosingSound);
@@ -75,12 +79,22 @@ public class Door : MonoBehaviour
         {
             PushSlider.gameObject.SetActive(true);
             PushSlider.value = pushAmount;
-            GameManager.Instance.StartBangingDoorMusic();
+
+            if (!QTEstarted)
+            {
+                QTEstarted = true;
+                GameManager.Instance.StartBangingDoorMusic();
+            }
         }
         else if (PushSlider != null) // stop QTE
         {
             PushSlider.gameObject.SetActive(false);
         }
+    }
+
+    public void EndAnimation()
+    {
+        isAnimating = false;
     }
 
     void OnTriggerEnter(Collider other)

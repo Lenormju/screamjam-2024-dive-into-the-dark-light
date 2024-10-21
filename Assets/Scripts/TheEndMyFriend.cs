@@ -8,7 +8,7 @@ public class TheEndMyFriend : MonoBehaviour
     {
         if (other != null && other.transform.tag == "Player")
         {
-            SceneManager.LoadScene("FinalScene", LoadSceneMode.Single);
+            GameManager.Instance.DisplayWinScreen();
         }
     }
 }

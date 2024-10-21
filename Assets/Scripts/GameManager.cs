@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour {
 
 
     [SerializeField] private Animator deathAnim;
+    [SerializeField] private Animator winAnim;
     [SerializeField] private Animator deathAnimSpider;
     public TextMeshProUGUI keys_nb_display;
     public GameObject key_image;
@@ -51,22 +52,40 @@ public class GameManager : MonoBehaviour {
 
     public bool isGamePaused = false;
 
+    public AudioSource gameoverAudioSource;
+    public AudioClip gameoverSpider;
+    public AudioClip gameoverGrunt;
     public void DisplayEndScreen()
     {
-        Debug.Log("fin du  game");
         if (final_boss)
         {
             deathAnimSpider.gameObject.SetActive(true);
             deathAnim.gameObject.SetActive(false);
             deathAnimSpider.SetTrigger("displayGameOver");
+
+            gameoverAudioSource.resource = gameoverSpider;
+            gameoverAudioSource.Play();
+            gameoverAudioSource.volume = 1.0f;
         }
         else
         {
             deathAnimSpider.gameObject.SetActive(false);
             deathAnim.gameObject.SetActive(true);
             deathAnim.SetTrigger("displayGameOver");
+
+            gameoverAudioSource.resource = gameoverGrunt;
+            gameoverAudioSource.Play();
+            gameoverAudioSource.volume = 1.0f;
         }
         SetCursorActive(true);
+    }
+
+    [SerializeField] private GameObject winGameCanvas;
+    public void DisplayWinScreen()
+    {
+        winGameCanvas.gameObject.SetActive(true);
+        SetCursorActive(true);
+        winAnim.SetTrigger("displayGameOver");
     }
 
     public void StopTime()

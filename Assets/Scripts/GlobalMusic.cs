@@ -23,18 +23,22 @@ public class GlobalMusic : MonoBehaviour
     public void StartAmbientMusic() {
         playerAudioSource.resource = ambientAudio;
         playerAudioSource.Play();
+        playerAudioSource.volume = 1.0f;
+        playerAudioSource.loop = true;
     }
 
     public void StartRunningMusic() {
         playerAudioSource.resource = playerRunningAudio;
         playerAudioSource.Play();
         playerAudioSource.volume = 0.2f;
+        playerAudioSource.loop = false;
     }
 
     public void StartBangingDoorMusic() {
         playerAudioSource.resource = playerBangingDoorAudio;
         playerAudioSource.Play();
-        playerAudioSource.volume = 0.6f;
+        playerAudioSource.volume = 0.25f;
+        playerAudioSource.loop = false;
     }
 
 }
