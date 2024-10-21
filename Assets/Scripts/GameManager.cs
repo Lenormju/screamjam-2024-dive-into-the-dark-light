@@ -19,14 +19,21 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public GameObject key1;
+    public GameObject key2;
+    public GameObject key3;
+
     public void InvokeKey2(){
         EventKey2?.Invoke(this, EventArgs.Empty);
     }
 
+    CheckpointSaving cpSaving;
     void Awake() {
          Time.timeScale = 1;
          isGamePaused = false;
         _instance = FindFirstObjectByType<GameManager>();
+
+        cpSaving = FindFirstObjectByType<CheckpointSaving>();
     }
 
     public Player Player;
@@ -39,6 +46,7 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         StartAmbientMusic();
+        cpSaving.ConfigureGameManagerWhenRespawning();
     }
 
 
@@ -86,6 +94,7 @@ public class GameManager : MonoBehaviour {
         winGameCanvas.gameObject.SetActive(true);
         SetCursorActive(true);
         winAnim.SetTrigger("displayGameOver");
+        Destroy(cpSaving);
     }
 
     public void StopTime()
@@ -109,10 +118,14 @@ public class GameManager : MonoBehaviour {
     public void SetNbKey(int nbKey)
     {
         nb_keys = nbKey;
-        if (nbKey > 0)
+        UpdateKeyNb();
+    }
+    public void UpdateKeyNb()
+    {
+        if (nb_keys > 0)
         {
             key_image.SetActive(true);
-            keys_nb_display.text = nbKey.ToString();
+            keys_nb_display.text = nb_keys.ToString();
         }
         else
         {

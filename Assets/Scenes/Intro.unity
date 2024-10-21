@@ -307,14 +307,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.19999999, g: 0.19999999, b: 0.19999999, a: 1}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: cd1e58473f95fda47b181a051c8e5a81, type: 3}
+  m_Texture: {fileID: 2800000, guid: 0fadcfb990df1c0449c784a6b0e6bfee, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -339,6 +339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 655876537}
   - component: {fileID: 655876536}
+  - component: {fileID: 655876538}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -426,6 +427,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &655876538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655876535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1042224080
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,8 +516,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293585642
-  m_fontColor: {r: 0.91823894, g: 0.91823894, b: 0.91823894, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -510,8 +534,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -723,16 +747,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You are an investigative journalist who have uncovered the compromising
+  m_text: 'You are an investigative journalist who has uncovered the compromising
     acts
 
     of a religious sect called "The Dark Light".
 
     You decided to infiltrate
-    their headquarter to gather proofs.
+    their headquarters to gather some proofs.
 
-    Unfortunately, you were captured by
-    the cultists.
+    Unfortunately, you were captured
+    by the cultists.
 
 
     You wake up in a small, dark and damp cell.
@@ -743,7 +767,7 @@ MonoBehaviour:
     You know one
     thing:
 
-    you have to exit you cell, explore the underground to find a way
+    You have to exit your cell, explore the underground to find a way
     to...'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: beb2e4a7d9e8aef4985891c1f44253a0, type: 2}
@@ -1153,7 +1177,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2140422118}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
