@@ -725,7 +725,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1671346965
 MonoBehaviour:
@@ -747,28 +747,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You are an investigative journalist who has uncovered the compromising
-    acts
-
-    of a religious sect called "The Dark Light".
-
-    You decided to infiltrate
-    their headquarters to gather some proofs.
-
-    Unfortunately, you were captured
-    by the cultists.
-
-
-    You wake up in a small, dark and damp cell.
-
-    You hear
-    strange and creepy noises coming from the nearby corridors.
-
-    You know one
-    thing:
-
-    You have to exit your cell, explore the underground to find a way
-    to...'
+  m_text: "You are an investigative journalist who has uncovered the compromising
+    acts of a religious sect called \"The Dark Light\":\nA ritual where they pierce
+    their eyes in hope to summon a powerful creature capable of devouring humans.
+    \n\nOne day, you wake up in a small, dark and damp cell... You are captured by
+    the cultists! \n\nYou are in their headquarters, you have to...\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: beb2e4a7d9e8aef4985891c1f44253a0, type: 2}
   m_sharedMaterial: {fileID: -583376818593714201, guid: beb2e4a7d9e8aef4985891c1f44253a0, type: 2}
@@ -992,8 +975,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294309365
-  m_fontColor: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
+    rgba: 4278251775
+  m_fontColor: {r: 1, g: 0.9429533, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

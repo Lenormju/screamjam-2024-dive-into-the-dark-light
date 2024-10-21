@@ -1,3 +1,4 @@
+using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,16 +26,17 @@ public class EnemyAI : MonoBehaviour
         if (!_agent.isOnNavMesh) return;
 
         _timerWaitOnPlace -= Time.deltaTime;
-        if (!hasTarget && _timerWaitOnPlace < 0) {
+        if (!hasTarget && _timerWaitOnPlace < 0 && justLostTarget) {
             chasingPlayer = false;
             hasTarget = false;
+            justLostTarget = false;
         }
 
         SetTarget();
     }
 
     void SetTarget() {
-        if (_timerWaitOnPlace > 0) { // Wait if lost player
+        if (justLostTarget && _timerWaitOnPlace > 0) { // Wait if lost player
             _agent.ResetPath();
             return;
         }
@@ -44,7 +46,7 @@ public class EnemyAI : MonoBehaviour
             _agent.destination = GameManager.Instance.Player.transform.position;
         } else if (hasTarget && !chasingPlayer) { // Chasing noise
             if (soundTarget != null && hasTarget) {
-                Debug.Log("Target sound");
+                //Debug.Log("Target sound");
                 _agent.destination = soundTarget.position;
                 if (IsCloseEnough(transform.position, soundTarget.position)) {
                     LostTarget();
@@ -54,7 +56,7 @@ public class EnemyAI : MonoBehaviour
             }
         } else if (isPatrolling) { // Default patrolling
             HandlingSwitchPatrolPoint();
-            Debug.Log("Patrolling to " + currentPatrolPoint);
+            //Debug.Log("Patrolling to " + currentPatrolPoint);
             if (currentPatrolPoint == 1) {
                 _agent.destination = patrollingPos1;
             } else {
@@ -77,7 +79,7 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] private float distCloseEnough = 1f;
     [SerializeField] private float distCloseEnoughSound = 10f;
-    bool IsCloseEnough(Vector3 pos1, Vector3 pos2) {
+    bool IsCloseEnough(Vector3 pos1, Vector3 pos2) { 
         pos1.y = 0;
         pos2.y = 0;
         return Vector3.Distance(pos1, pos2) < distCloseEnough;
@@ -86,12 +88,16 @@ public class EnemyAI : MonoBehaviour
     private Transform soundTarget = null;
     void onNoiseEmitted(Transform noise, float intensity) {
         float hearRange = intensity * distCloseEnoughSound * 5;
-        if (Vector3.Distance(this.transform.position, noise.position) < hearRange)
+        if (!_agent.isOnNavMesh) return;
+        if (Mathf.Abs(this.transform.position.y - GameManager.Instance.Player.transform.position.y) > 2f) return;
+
+        if (Vector3.Distance(this.transform.position, GameManager.Instance.Player.transform.position) < hearRange)
         {
-            Debug.Log("SOUND DISTANCE");
+            //Debug.Log("noise emitted, hear range = " + hearRange + ";" + Vector3.Distance(this.transform.position, GameManager.Instance.Player.transform.position));
+            justLostTarget = false;
             hasTarget = true;
             _timerWaitOnPlace = 0;
-            soundTarget = noise;
+            soundTarget = GameManager.Instance.Player.transform;
         }
     }
 
@@ -100,8 +106,12 @@ public class EnemyAI : MonoBehaviour
     private float _timerWaitOnPlace = 0;
     private bool hasTarget = false;
     private void OnTriggerEnter(Collider other) {
+        if (!_agent.isOnNavMesh) return;
+        if (Mathf.Abs(this.transform.position.y - GameManager.Instance.Player.transform.position.y) > 2f) return;
+
         if (other.tag == "Player") {
             chasingPlayer = true;
+            justLostTarget = false;
             hasTarget = true;
             _timerWaitOnPlace = 0;
         }
@@ -114,7 +124,11 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    bool justLostTarget = false;
     private void LostTarget() {
+        if (!chasingPlayer) return; 
+
+        justLostTarget = true;
         hasTarget = false;
         chasingPlayer = false;
         _timerWaitOnPlace = timeWaitOnPlaceWhenLostTarget;

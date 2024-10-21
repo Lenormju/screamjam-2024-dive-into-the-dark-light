@@ -6,7 +6,7 @@ public class AudioSourceRaycasting : MonoBehaviour
     private AudioSource _audio_source;
 
     void Start() {
-        _player_transform = GameObject.Find("/Player").transform;
+        _player_transform = GameManager.Instance.Player.transform;
         _audio_source = GetComponent<AudioSource>();
     }
     void Update() {

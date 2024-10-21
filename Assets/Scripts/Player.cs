@@ -142,7 +142,7 @@ public class Player : MonoBehaviour
                 // immobile
             } else {
                 //Debug.Log("crounch");
-                OnNoise?.Invoke(hit.transform, noiseVolume);
+                OnNoise?.Invoke(this.transform, noiseVolume);
             }
         } else {
             // rien
@@ -152,6 +152,8 @@ public class Player : MonoBehaviour
         // sélectionner le bruit à jouer
         AudioResource audioToPlay = null;  // by default
         if (isGroundBoneHit) {
+            playerWalking.volume = 0.4f;
+
             newSpeed = walkingSpeed/2;
             int sound  = rnd.Next(1, 5);  
             if (sound == 1) {
@@ -166,6 +168,8 @@ public class Player : MonoBehaviour
                 Debug.Log("error value from random");
             }
         } else if (isGroundStoneHit) {
+            playerWalking.volume = 0.1f;
+
             newSpeed = walkingSpeed*2;
             int sound  = rnd.Next(1, 4);  
             if (sound == 1) {

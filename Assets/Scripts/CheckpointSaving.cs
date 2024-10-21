@@ -14,6 +14,15 @@ public class CheckpointSaving : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    void Update()
+    {
+        if (gotAllKeys && GameManager.Instance.nb_keys == 0)
+        {
+            GameManager.Instance.nb_keys = 3;
+            GameManager.Instance.SetNbKey(keysNb);
+        }
+    }
+
     public void ConfigureGameManagerWhenRespawning()
     {
 
