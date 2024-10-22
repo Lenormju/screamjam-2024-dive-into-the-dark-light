@@ -18,8 +18,7 @@ public class CheckpointSaving : MonoBehaviour
     {
         if (gotAllKeys && GameManager.Instance.nb_keys == 0)
         {
-            GameManager.Instance.nb_keys = 3;
-            GameManager.Instance.SetNbKey(keysNb);
+            GameManager.Instance.SetNbKey(3);
         }
     }
 
